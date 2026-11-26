@@ -2,7 +2,7 @@
 #include <esp_now.h>
 #include <Adafruit_NeoPixel.h>
 //#include "BluetoothSerial.h"
-#include "BleKeyboard.h" //https://github.com/T-vK/ESP32-BLE-Keyboard
+#include <BleKeyboard.h> // https://github.com/T-vK/ESP32-BLE-Keyboard 0.2.2（README の手順で別に入れる）
 
 #define LEDs 13
 #define button1 32
@@ -25,7 +25,7 @@
 Adafruit_NeoPixel pixels(NUMPIXELS, LEDs, NEO_GRB + NEO_KHZ800);
 
 //BluetoothSerial SerialBT;
-BleKeyboard bleKeyboard;
+BleKeyboard bleKeyboard("FFKB"); // BLE のデバイス名（以前は同梱の BleKeyboard.h の既定値を書き換えていた）
 
 int lines[4]={0};
 char w[2]={0};
