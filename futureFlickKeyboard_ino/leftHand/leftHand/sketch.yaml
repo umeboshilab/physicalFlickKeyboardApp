@@ -1,5 +1,7 @@
-# arduino-cli のビルド設定（左手）。このフォルダで `arduino-cli compile` を実行すると、
-# 下の ffkb プロファイルの版でビルドする（必要なボード定義とライブラリは arduino-cli が自動で取ってくる）。
+# arduino-cli のビルド設定（左手）。arduino-cli 1.1 以降で読める。
+# - `arduino-cli compile --profile ffkb <このフォルダ>`: 下の ffkb プロファイルの版だけでビルドする。
+#   ボード定義とライブラリは arduino-cli が自動で取ってきて、全体に入れたものは使わない。
+# - `arduino-cli compile <このフォルダ>`: 全体に入れたボード定義・ライブラリで、default_fqbn のボードとパーティションでビルドする。
 # Arduino IDE で書き込むときも、ボード・パーティション・ライブラリの版はここに合わせる。
 profiles:
   ffkb:
@@ -13,4 +15,6 @@ profiles:
     port_config:
       baudrate: 115200
 
-default_profile: ffkb
+default_fqbn: esp32:esp32:esp32:PartitionScheme=default
+default_port_config:
+  baudrate: 115200

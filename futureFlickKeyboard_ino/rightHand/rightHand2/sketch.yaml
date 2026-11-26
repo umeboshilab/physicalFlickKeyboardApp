@@ -1,10 +1,13 @@
-# arduino-cli のビルド設定（右手）。このフォルダで `arduino-cli compile` を実行すると、
-# 下の ffkb プロファイルの版でビルドする（ボード定義と Adafruit NeoPixel は arduino-cli が自動で取ってくる）。
+# arduino-cli のビルド設定（右手）。arduino-cli 1.3 以降で読める（libraries の dir: が 1.3 から）。
+# - `arduino-cli compile --profile ffkb <このフォルダ>`: 下の ffkb プロファイルの版だけでビルドする。
+#   ボード定義と Adafruit NeoPixel は arduino-cli が自動で取ってきて、全体に入れたものは使わない。
+# - `arduino-cli compile <このフォルダ>`: 全体に入れたボード定義・ライブラリで、default_fqbn のボードとパーティションでビルドする。
 # Arduino IDE で書き込むときも、ボード・パーティション・ライブラリの版はここに合わせる。
 #
-# ESP32-BLE-Keyboard（T-vK）は Arduino のライブラリ一覧に無いため、先に次のコマンドで
-# futureFlickKeyboard_ino/libraries/ に取ってくる（リポジトリの直下で実行。このフォルダは .gitignore 済み）。
+# ESP32-BLE-Keyboard（T-vK）は Arduino のライブラリ一覧に無いため、プロファイルでビルドする前に
+# 次のコマンドで futureFlickKeyboard_ino/libraries/ に取ってくる（リポジトリの直下で実行。このフォルダは .gitignore 済み）。
 #   git clone --depth 1 --branch 0.2.2 https://github.com/T-vK/ESP32-BLE-Keyboard.git futureFlickKeyboard_ino/libraries/ESP32-BLE-Keyboard
+# 0.2.2 のタグはコミット 928c09320e3e6e344a63640c7de21d52a20c1d47 を指す（2026-11 時点）。
 profiles:
   ffkb:
     notes: 右手ユニット（ESP-WROOM-32）。Wi-Fi（ESP-NOW）と BLE を両方使い既定のパーティションに入らないため、Huge APP（3MB APP / No OTA）にする。
@@ -18,4 +21,6 @@ profiles:
     port_config:
       baudrate: 115200
 
-default_profile: ffkb
+default_fqbn: esp32:esp32:esp32:PartitionScheme=huge_app
+default_port_config:
+  baudrate: 115200
