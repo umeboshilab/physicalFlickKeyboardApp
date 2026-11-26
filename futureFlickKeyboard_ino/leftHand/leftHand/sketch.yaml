@@ -1,0 +1,16 @@
+# arduino-cli のビルド設定（左手）。このフォルダで `arduino-cli compile` を実行すると、
+# 下の ffkb プロファイルの版でビルドする（必要なボード定義とライブラリは arduino-cli が自動で取ってくる）。
+# Arduino IDE で書き込むときも、ボード・パーティション・ライブラリの版はここに合わせる。
+profiles:
+  ffkb:
+    notes: 左手ユニット（ESP-WROOM-32）。ESP-NOW で右手へキー番号を送るだけなので、パーティションは既定のままで入る。
+    fqbn: esp32:esp32:esp32:PartitionScheme=default
+    platforms:
+      - platform: esp32:esp32 (1.0.4)
+        platform_index_url: https://espressif.github.io/arduino-esp32/package_esp32_index.json
+    libraries:
+      - Adafruit NeoPixel (1.6.0)
+    port_config:
+      baudrate: 115200
+
+default_profile: ffkb

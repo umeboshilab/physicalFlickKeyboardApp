@@ -102,4 +102,7 @@ keywords.txt
 library.properties
 README.md
 
+# 右手のビルド用に取ってくる ESP32-BLE-Keyboard（rightHand2/sketch.yaml を参照）
+futureFlickKeyboard_ino/libraries/
+
 

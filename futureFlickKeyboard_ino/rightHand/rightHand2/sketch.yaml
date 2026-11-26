@@ -1,0 +1,21 @@
+# arduino-cli のビルド設定（右手）。このフォルダで `arduino-cli compile` を実行すると、
+# 下の ffkb プロファイルの版でビルドする（ボード定義と Adafruit NeoPixel は arduino-cli が自動で取ってくる）。
+# Arduino IDE で書き込むときも、ボード・パーティション・ライブラリの版はここに合わせる。
+#
+# ESP32-BLE-Keyboard（T-vK）は Arduino のライブラリ一覧に無いため、先に次のコマンドで
+# futureFlickKeyboard_ino/libraries/ に取ってくる（リポジトリの直下で実行。このフォルダは .gitignore 済み）。
+#   git clone --depth 1 --branch 0.2.2 https://github.com/T-vK/ESP32-BLE-Keyboard.git futureFlickKeyboard_ino/libraries/ESP32-BLE-Keyboard
+profiles:
+  ffkb:
+    notes: 右手ユニット（ESP-WROOM-32）。Wi-Fi（ESP-NOW）と BLE を両方使い既定のパーティションに入らないため、Huge APP（3MB APP / No OTA）にする。
+    fqbn: esp32:esp32:esp32:PartitionScheme=huge_app
+    platforms:
+      - platform: esp32:esp32 (1.0.4)
+        platform_index_url: https://espressif.github.io/arduino-esp32/package_esp32_index.json
+    libraries:
+      - Adafruit NeoPixel (1.6.0)
+      - dir: ../../libraries/ESP32-BLE-Keyboard
+    port_config:
+      baudrate: 115200
+
+default_profile: ffkb
